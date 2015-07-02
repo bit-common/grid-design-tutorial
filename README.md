@@ -1,26 +1,110 @@
-# [Start Bootstrap](http://startbootstrap.com/) - [Full Width Pics](http://startbootstrap.com/template-overviews/full-width-pics/)
+# Grid Layout
 
-[Full Width Pics](http://startbootstrap.com/template-overviews/full-width-pics/) is an HTML starter template for [Bootstrap](http://getbootstrap.com/) created by [Start Bootstrap](http://startbootstrap.com/). This template features numerous full width background image content sections.
+Верстка - це процес створення такого html-файла, який забезпечує розміщення всіх функціональних, інформаційних та візуальних блоків сторінки. Для корегування вигляду сторінки використовують таблиці стилів (css файли).
 
-## Getting Started
+## [HTML](https://en.wikipedia.org/?title=HTML)
 
-To use this template, choose one of the following options to get started:
-* Download the latest release on Start Bootstrap
-* Fork this repository on GitHub
+Структура файлу
 
-## Bugs and Issues
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Загальна конфігурація -->
+  </head>
+  <body>
+    <!-- DOM - елементи -->
+  </body>
+</html>
+```
 
-Have a bug or an issue with this template? [Open a new issue](https://github.com/IronSummitMedia/startbootstrap-full-width-pics/issues) here on GitHub or leave a comment on the [template overview page at Start Bootstrap](http://startbootstrap.com/template-overviews/full-width-pics/).
+Все, що знаходиться всередині тега `<body>` може бути видимим в браузері. Ми можемо розміщувати там три типи елементів, а саме,
+* блочні (block)
+* стрічкові (inline)
+* стрічково-блочні (inline-block)
 
-## Creator
+Блочний елемент займає всю доступну йому ширину (100% від батьківського блоку). Висота блочного елемента визначається його вмістом або відповідним css-правилом `height`.`<LINK href="special.css" rel="stylesheet" type="text/css">`
+Найпопулярнішими блочними елементами є [div](http://www.w3schools.com/tags/tag_div.asp) (блок, секція сторінки), [p](http://www.w3schools.com/tags/tag_p.asp) (параграф), [h](http://www.w3schools.com/tags/tag_hn.asp) (заголовок) та інші.
 
-Start Bootstrap was created by and is maintained by **David Miller**, Managing Parter at [Iron Summit Media Strategies](http://www.ironsummitmedia.com/).
+Стрічкові елементи відрізняються від блокових (боксових) тим, що займають лише необхідну їм висоту та ширину. Окрім того, в них не можна включати лиш інші стрічкові елементи.
+Найпопулярнішими стрічковими елементами є [a](http://www.w3schools.com/tags/tag_a.asp) (посилання), [span](http://www.w3schools.com/tags/tag_span.asp) (виділення частини тексту), [img](http://www.w3schools.com/tags/tag_img.asp) (зображення), [input](http://www.w3schools.com/tags/tag_input.asp) (поле вводу), тощо.
 
-* https://twitter.com/davidmillerskt
-* https://github.com/davidtmiller
+Стрічково-блочні елементи створюються за допомогою css - правила `display: inline-block`. Такий елемент поєднює властивості блочних та стрічкових елементів.
 
-Start Bootstrap is based on the [Bootstrap](http://getbootstrap.com/) framework created by [Mark Otto](https://twitter.com/mdo) and [Jacob Thorton](https://twitter.com/fat).
+## [CSS](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
 
-## Copyright and License
+CSS файли підключаються в HTML-файлі тегом `<link href="адреса-до/main.css" rel="stylesheet" type="text/css">`
+CSS код складається з селектора і правил, які ми хочемо йому присвоїти. Наприклад:
+```css
+a{
+  text-decoration: none;
+  /* знімає підкреслення з посилань */
+}
 
-Copyright 2013-2015 Iron Summit Media Strategies, LLC. Code released under the [Apache 2.0](https://github.com/IronSummitMedia/startbootstrap-full-width-pics/blob/gh-pages/LICENSE) license.
+.header{
+  background-color: #ccc;
+  /* встановлює сірий колір тла для класу background */
+}
+
+#user-pic{
+  display: none;
+  /* ховає елемент з id user-pic */
+}
+```
+
+css правила опрацьовуються двигуном зверху вниз, тому для селекторів однакової ваги буде використовуватися найнижче правило в файлі.
+
+#### Вага селекторів
+
+Деколи деякі селектори потрібно уточнювати. Так, ми доповнюємо, розширюємо класи, створюємо певні конструкції з html елементів. Поняття ваги селекторів допомагає нам конкретизувати множину елементів, до яких ми хочемо звернутися.
+
+Пояснюю на коді.
+
+```html
+<div id='top'>
+    <p>Hello world!</p>
+</div>
+```
+
+```css
+* Всі абзаци всередині будь-якого елемента з id top */
+#top p {
+}
+
+/* Всі абзаци всередині елементів div */
+div p {
+}
+
+/* Всі абзаци всередині елементів div з id top */
+div#top p {
+}
+
+/* Всі абзаци в документі */
+p {
+}
+
+/* Всі елементи всередині всіх елементів div */
+div * {
+}
+
+/* Всі елементи всередині кожного елемента з id top */
+#top * {
+}
+```
+
+Вага правила залежить від наступних факторів:
+
+* Місце визначення правила (правила, задані в тезі `style` мають більшу вагу, ніж в правила в стильовому файлі). Я ВАМ ЦЕ ЗАРАЗ КАЖУ, АЛЕ ПООБІЦЯЙТЕ, ЩО НІКОЛИ, ЧУЄТЕ, НІКОЛИ ТАК РОБИТИ НЕ БУДЕТЕ.
+* Наскільки точно правило описує вкладеності (`body p` специфічніше ніж просто `p`)
+* Наскільки точно правило вказує на елементи (`body *` менш специфічне ніж body `p`)
+* Наскільки точно правило вказує на класс та id елемента ( `p#first` і `p.first` специфічніше ніж `p`)
+
+## [Grid Layout](http://www.w3.org/TR/css3-grid-layout/)
+
+В CSS3 є дуже корисний модуль - Grid Layout. Це механізм зручного розміщення контенту на сторінці.
+В контейнері (тег `section`) весь вміст всередині треба розміщувати по створеній віртуальній сітці, використовуючи правила  `grid-columns` та `grid-rows`. Для кожного елементу достатньою просто сказати, де він буде знаходитися. З такою сіткою ви стиеалися, коли ми розглядали Twitter Bootstrap.
+
+## Links
+* [Типу енциклопедія тегів і css-правил](http://htmlbook.ru/html)
+* [Непогано про css](http://live.julik.nl/2005/02/cascade)
+* [Доступно про Grid Layout](http://habrahabr.ru/company/microsoft/blog/140715/)
